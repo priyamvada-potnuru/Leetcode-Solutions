@@ -1,0 +1,26 @@
+class Solution {
+public:
+    void solve(int ind,string combo[],string digits,string res,vector<string>&comb)
+    {
+        if(ind==digits.length())
+        {
+            comb.push_back(res);
+            return;
+        }
+        int digit=digits[ind]-'0';
+        for(int i=0;i<combo[digit].size();i++)
+        {
+            solve(ind+1,combo,digits,res+combo[digit][i],comb);
+        }
+    }
+    vector<string> letterCombinations(string digits) {
+         if(digits.empty())
+        {
+            return {};
+        }
+        string combo[]={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        vector<string>comb;
+        solve(0,combo,digits,"",comb);
+        return comb;
+    }
+};
