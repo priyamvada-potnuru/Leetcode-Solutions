@@ -1,0 +1,40 @@
+class Solution {
+public:
+    void solve(int n,vector<string>&board,int col,vector<int>&leftrow,vector<int>&lowerdiagnol,vector<int>&upperdiagnol,vector<vector<string>>&res)
+    {
+        if(col==board[0].size())
+            {
+                res.push_back(board);
+                return;
+            }
+        for(int i=0;i<board.size();i++)
+        {
+            if(leftrow[i]==0 && lowerdiagnol[i+col]==0 && upperdiagnol[board.size()-1+(col-i)]==0)
+            {
+                board[i][col]='Q';
+                leftrow[i]=1;
+                lowerdiagnol[i+col]=1;
+                upperdiagnol[board.size()-1+(col-i)]=1;
+                solve(n,board,col+1,leftrow,lowerdiagnol,upperdiagnol,res);
+                board[i][col]='.';
+                leftrow[i]=0;
+                lowerdiagnol[i+col]=0;
+                upperdiagnol[board.size()-1+(col-i)]=0;
+            }
+        }
+    }
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>>res;
+        vector<string> board(n);
+        string s(n,'.');
+        vector<int>leftrow(n,0);
+        vector<int>lowerdiagnol(2*n-1,0);
+        vector<int>upperdiagnol(2*n-1,0);
+        for(int i=0;i<n;i++)
+        {
+            board[i]=s;
+        }
+        solve(n,board,0,leftrow,lowerdiagnol,upperdiagnol,res);
+        return res;
+    }
+};
