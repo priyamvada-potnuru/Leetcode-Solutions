@@ -1,0 +1,22 @@
+class Solution {
+public:
+    double pow(double x,long long nn)
+    {
+        if(nn==0) return 1.0;
+        if(nn==1) return x;
+        if(nn%2==0)
+        {
+            return pow(x*x,nn/2);
+        }
+            return x*pow(x,nn-1);
+    }
+    double myPow(double x, int n) {
+        if(n==0 || x==1.0) return 1.0;
+       long long nn=n;
+       if(nn<0)
+       {
+        return pow(1/x,-1*nn);
+       } 
+       return pow(x,nn);
+    }
+};
