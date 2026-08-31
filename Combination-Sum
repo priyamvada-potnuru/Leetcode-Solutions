@@ -1,0 +1,27 @@
+class Solution {
+public:
+    void find(int ind,vector<int>& candidates,int n,int target,vector<int>& ds,vector<vector<int>>& res)
+    {
+        if(ind==n)
+        {
+            if(target==0)
+            {
+                res.push_back(ds);
+            }
+            return;
+        }   
+        if(candidates[ind]<=target)
+        {
+            ds.push_back(candidates[ind]);
+            find(ind,candidates,n,target-candidates[ind],ds,res);
+            ds.pop_back();
+        }    
+            find(ind+1,candidates,n,target,ds,res);
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>>res;
+        vector<int>ds;
+        find(0,candidates,candidates.size(),target,ds,res);
+        return res;
+    }
+};
